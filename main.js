@@ -23,18 +23,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Initialize EmailJS
+import emailjs from '@emailjs/browser';
+emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+
 // Form submission handling
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
     
-    // Simulate form submission
-    console.log('Form submitted:', data);
-    contactForm.reset();
-    alert('Thank you for your message! We will get back to you soon.');
+    try {
+      const formData = new FormData(contactForm);
+      const templateParams = {
+        to_email: 'guanhaolee940@gmail.com',
+        from_name: formData.get('name'),
+        from_email: formData.get('email'),
+        message: formData.get('message')
+      };
+
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        templateParams
+      );
+
+      contactForm.reset();
+      alert('Thank you for your message! We will get back to you soon.');
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Sorry, there was an error sending your message. Please try again later.');
+    }
   });
 }
 
