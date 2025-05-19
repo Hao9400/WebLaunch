@@ -111,6 +111,8 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding: var(--spacing-xs);
+    z-index: 1001;
   }
   
   .menu-toggle span {
@@ -120,6 +122,18 @@
     background: var(--color-primary);
     margin: 5px 0;
     transition: var(--transition);
+  }
+  
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
   }
   
   /* Hero Section */
@@ -246,6 +260,13 @@
     margin: 0 auto;
   }
   
+  .contact-form {
+    background: var(--color-background);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+  
   .form-group {
     margin-bottom: var(--spacing-md);
   }
@@ -254,6 +275,7 @@
     display: block;
     margin-bottom: var(--spacing-xs);
     color: var(--color-text);
+    font-weight: 500;
   }
   
   input,
@@ -263,6 +285,14 @@
     border: 1px solid var(--color-secondary);
     border-radius: var(--border-radius);
     font-family: inherit;
+    transition: var(--transition);
+  }
+  
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(13, 59, 102, 0.1);
   }
   
   textarea {
@@ -321,6 +351,7 @@
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    font-weight: 500;
   }
   
   .btn-primary:hover {
@@ -340,6 +371,20 @@
   
     .nav-links {
       display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--color-background);
+      padding: 80px var(--spacing-md);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+  
+    .nav-links.active {
+      display: flex;
     }
   
     .menu-toggle {
@@ -365,5 +410,9 @@
     .footer-links {
       flex-direction: column;
       gap: var(--spacing-sm);
+    }
+  
+    .contact-form {
+      padding: var(--spacing-md);
     }
   }
